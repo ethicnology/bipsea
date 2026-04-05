@@ -205,7 +205,19 @@ def xprv(mnemonic, passphrase, mainnet):
     type=click.Choice(ENTROPY_TO_VALUES),
     help="Output language for `--application mnemonic`.",
 )
-def derive_cli(application, number, index, special, xprv, to):
+@click.option(
+    "--identity",
+    type=click.IntRange(0, 2**31 - 1),
+    default=None,
+    help="Nostr identity index (0=proof/revocation key, >=1 usable). Required for --application nostr.",
+)
+@click.option(
+    "--account",
+    type=click.IntRange(0, 2**31 - 1),
+    default=None,
+    help="Nostr account index (0=proof key, >=1 usable). Required for --application nostr.",
+)
+def derive_cli(application, number, index, special, xprv, to, identity, account):
     if xprv:
         xprv = xprv.strip()
     else:
@@ -253,6 +265,24 @@ def derive_cli(application, number, index, special, xprv, to):
     elif application == "dice":
         check_range(number, application)
         path += f"/{special}'/{number}'/{index}'"
+    elif application == "nostr":
+        if identity is None or account is None:
+            raise click.UsageError(
+                "--identity and --account are required for --application nostr."
+            )
+        if identity == 0:
+            click.secho(
+                "Warning: identity=0 is reserved as a proof key to link identities together.",
+                fg="yellow",
+                err=True,
+            )
+        if account == 0:
+            click.secho(
+                f"Warning: account=0 is reserved as the proof key to link accounts for identity {identity}.",
+                fg="yellow",
+                err=True,
+            )
+        path += f"/{identity}'/{account}'"
 
     derived = derive(master, path)
     if application == "drng":
