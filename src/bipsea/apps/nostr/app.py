@@ -26,23 +26,15 @@ class NostrApp:
                 range=(0, None),
                 help="Identity index (0=proof/revocation key, >=1 usable).",
             ),
-            Param(
-                "account",
-                ("--account",),
-                int,
-                required=True,
-                range=(0, None),
-                help="Account index (0=proof key, >=1 usable).",
-            ),
         ]
 
-    def path_segments(self, index: int, identity: int, account: int, **_) -> list[str]:
-        return [f"{identity}'", f"{account}'"]
+    def path_segments(self, index: int, identity: int, **_) -> list[str]:
+        return [f"{identity}'", f"{index}'"]
 
     def parse_path(self, segments: list[str]) -> dict[str, Any]:
         return {
             "identity": hardened_int(segments[0]),
-            "account": hardened_int(segments[1]),
+            "index": hardened_int(segments[1]),
         }
 
     def apply(self, entropy: bytes, **_) -> dict[str, Any]:

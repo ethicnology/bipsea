@@ -452,13 +452,13 @@ class TestIntegration:
 
 class TestNostr:
     def test_path_segments(self):
-        assert nostr_app.path_segments(index=0, identity=1, account=2) == ["1'", "2'"]
+        assert nostr_app.path_segments(index=2, identity=1) == ["1'", "2'"]
 
     @pytest.mark.parametrize("vector", nostr_app.vectors)
     def test_vectors(self, runner, vector):
         segments = vector.path.split("/")
         identity = int(segments[3].rstrip("'"))
-        account = int(segments[4].rstrip("'"))
+        index = int(segments[4].rstrip("'"))
         result = runner.invoke(
             cli,
             [
@@ -466,13 +466,13 @@ class TestNostr:
                 "-a", "nostr",
                 "-x", vector.master,
                 "--identity", identity,
-                "--account", account,
+                "--index", index,
             ],
         )
         assert result.exit_code == 0
         assert result.output.strip() == vector.output
 
-    def test_missing_identity_and_account(self, runner):
+    def test_missing_identity(self, runner):
         result = runner.invoke(
             cli, ["derive", "-a", "nostr", "-x", nostr_app.vectors[0].master]
         )
@@ -486,19 +486,19 @@ class TestNostr:
                 "derive", "-a", "nostr",
                 "-x", nostr_app.vectors[0].master,
                 "--identity", 0,
-                "--account", 1,
+                "--index", 1,
             ],
         )
         assert "Warning" in result.output
 
-    def test_account_zero_warning(self, runner):
+    def test_index_zero_warning(self, runner):
         result = runner.invoke(
             cli,
             [
                 "derive", "-a", "nostr",
                 "-x", nostr_app.vectors[0].master,
                 "--identity", 1,
-                "--account", 0,
+                "--index", 0,
             ],
         )
         assert "Warning" in result.output
