@@ -13,7 +13,7 @@ def nsec_encode(key_bytes: bytes) -> str:
 
 class NostrApp:
     name = "nostr"
-    code = "9000'"
+    code = "128002'"
 
     @property
     def params(self) -> list[Param]:
@@ -49,21 +49,21 @@ class NostrApp:
         return [
             TestVector(
                 master="xprv9s21ZrQH143K2LBWUUQRFXhucrQqBpKdRRxNVq2zBqsx8HVqFk2uYo8kmbaLLHRdqtQpUm98uKfu3vca1LqdGhUtyoFnCNkfmXRyPXLjbKb",
-                path="m/83696968'/9000'/1'/1'",
-                entropy="552ad1d578fe1bc927cec9612651652b07c52dde4017911bc23bc953568075ff",
-                output="nsec1254dr4tclcdujf7we9sjv5t99vru2tw7gqtezx7z80y4x45qwhlsmxapst",
+                path="m/83696968'/128002'/1'/1'",
+                entropy="ff6eb0fcdf1ef87a2a06b0d7884d495b486d0faa210e9f80f23fd649d6e114d2",
+                output="nsec1lahtplxlrmu852sxkrtcsn2ftdyx6ra2yy8flq8j8ltyn4hpznfq23uvqz",
             ),
             TestVector(
                 master="xprv9s21ZrQH143K2LBWUUQRFXhucrQqBpKdRRxNVq2zBqsx8HVqFk2uYo8kmbaLLHRdqtQpUm98uKfu3vca1LqdGhUtyoFnCNkfmXRyPXLjbKb",
-                path="m/83696968'/9000'/1'/2'",
-                entropy="4fd36c0061a65db375b4350f44bb62a6d7f716ee93bd0f59887ac50b35fa8b96",
-                output="nsec1flfkcqrp5ewmxad5x585fwmz5mtlw9hwjw7s7kvg0tzskd063wtq34wlgr",
+                path="m/83696968'/128002'/1'/2'",
+                entropy="917628689652288f6983c8a01db516d0697d5198dcf9de9010597f5e322fba6e",
+                output="nsec1j9mzs6yk2g5g76vrezspmdgk6p5h65vcmnuaayqst9l4uv30hfhqje0jyh",
             ),
             TestVector(
                 master="xprv9s21ZrQH143K2LBWUUQRFXhucrQqBpKdRRxNVq2zBqsx8HVqFk2uYo8kmbaLLHRdqtQpUm98uKfu3vca1LqdGhUtyoFnCNkfmXRyPXLjbKb",
-                path="m/83696968'/9000'/2'/1'",
-                entropy="b2d3b48992d46f98beac0196c4e258417087e467dbec1503342785368f4402c2",
-                output="nsec1ktfmfzvj63he304vqxtvfcjcg9cg0er8m0kp2qe5y7zndr6yqtpq7q5y44",
+                path="m/83696968'/128002'/2'/1'",
+                entropy="fa2e784291b1fd347ba3624672e3090cb2cee34b8567180336e3aa290d02715b",
+                output="nsec1lgh8ss53k87ng7arvfr89ccfpjevac6ts4n3sqekuw4zjrgzw9dsq3uelh",
             ),
         ]
 
