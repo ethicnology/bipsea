@@ -261,9 +261,7 @@ def derive_cli(application, number, index, special, xprv, to, identity):
         path += f"/{special}'/{number}'/{index}'"
     elif application == "nostr":
         if identity is None:
-            raise click.UsageError(
-                "--identity is required for --application nostr."
-            )
+            raise click.UsageError("--identity is required for --application nostr.")
         if identity == 0:
             click.secho(
                 "Warning: identity=0 is reserved as a proof key to link identities together.",

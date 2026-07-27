@@ -17,16 +17,7 @@ class NostrApp:
 
     @property
     def params(self) -> list[Param]:
-        return [
-            Param(
-                "identity",
-                ("--identity",),
-                int,
-                required=True,
-                range=(0, None),
-                help="Identity index (0=proof/revocation key, >=1 usable).",
-            ),
-        ]
+        return []
 
     def path_segments(self, index: int, identity: int, **_) -> list[str]:
         return [f"{identity}'", f"{index}'"]

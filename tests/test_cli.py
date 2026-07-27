@@ -463,10 +463,14 @@ class TestNostr:
             cli,
             [
                 "derive",
-                "-a", "nostr",
-                "-x", vector.master,
-                "--identity", identity,
-                "--index", index,
+                "-a",
+                "nostr",
+                "-x",
+                vector.master,
+                "--identity",
+                identity,
+                "--index",
+                index,
             ],
         )
         assert result.exit_code == 0
@@ -483,10 +487,15 @@ class TestNostr:
         result = runner.invoke(
             cli,
             [
-                "derive", "-a", "nostr",
-                "-x", nostr_app.vectors[0].master,
-                "--identity", 0,
-                "--index", 1,
+                "derive",
+                "-a",
+                "nostr",
+                "-x",
+                nostr_app.vectors[0].master,
+                "--identity",
+                0,
+                "--index",
+                1,
             ],
         )
         assert "Warning" in result.output
@@ -495,10 +504,15 @@ class TestNostr:
         result = runner.invoke(
             cli,
             [
-                "derive", "-a", "nostr",
-                "-x", nostr_app.vectors[0].master,
-                "--identity", 1,
-                "--index", 0,
+                "derive",
+                "-a",
+                "nostr",
+                "-x",
+                nostr_app.vectors[0].master,
+                "--identity",
+                1,
+                "--index",
+                0,
             ],
         )
         assert "Warning" in result.output
